@@ -1,0 +1,108 @@
+{% extends "layouts/default.html" %}
+
+{% block content %}
+<div class="container">
+	<div class="jumbotron">
+		<img src="/images/logo.svg" width="160">
+		<h1>Welcome</h1>
+		<p>This is your new <a href="http://keystonejs.com" target="_blank">KeystoneJS</a> website.</p>
+		<p>
+			It includes the latest versions of
+			<a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>
+			and <a href="http://www.jquery.com/" target="_blank">jQuery</a>.
+		</p>
+		<p>Visit the <a href="http://keystonejs.com/guide" target="_blank">Getting Started</a> guide to learn how to
+			customise it.</p>
+		<hr>
+		{% if user and user.canAccessKeystone %}
+		<p>
+			<a href="/keystone" class="btn btn-lg btn-primary">Open the Admin UI</a>
+		</p>
+		{% else %}
+		<p>We have created a default Admin user for you with the email <strong>admin@admin.com</strong> and the password
+			<strong>admin</strong>.</p>
+		<p>
+			<a href="/keystone/signin" style="margin-right: 10px" class="btn btn-lg btn-primary">Sign in</a>
+			to use the Admin UI.
+		</p>
+		{% endif %}
+		<hr>
+		<p>
+			Remember to <a href="https://github.com/keystonejs/keystone" target="_blank">Star KeystoneJS on GitHub</a>
+			and
+			<a href="https://twitter.com/keystonejs" target="_blank">follow @keystonejs</a> on twitter for updates.
+		</p>
+	</div>
+
+	<a class="btn btn-primary btn-lg" href="/auth/facebook">
+		Login with Facebook
+	</a>
+
+	<!-- Button trigger modal -->
+	<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loginModal">
+		Launch loginModal
+	</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+		 aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<button type="button" class="close"
+							data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						Modal title
+					</h4>
+				</div>
+
+				<!-- Modal Body -->
+				<div class="modal-body">
+
+					{% if isLogged %}
+					<div>
+						Hello <h2>{{ user.email }}</h2>
+					</div>
+					{% else %}
+					<form role="form" id="loginForm" method="post" action="/login">
+						<div class="form-group">
+							<label for="InputEmail">Email address</label>
+							<input name="email" type="email" class="form-control"
+								   id="InputEmail" placeholder="Enter email"/>
+						</div>
+						<div class="form-group">
+							<label for="Password">Password</label>
+							<input name="password" type="password" class="form-control"
+								   id="Password" placeholder="Password"/>
+						</div>
+
+					</form>
+					{% endif %}
+
+
+				</div>
+
+				<!-- Modal Footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default"
+							data-dismiss="modal">
+						Close
+					</button>
+					<button type="submit" form="loginForm" class="btn btn-primary">
+						Save changes
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+{% endblock %}
+
+
