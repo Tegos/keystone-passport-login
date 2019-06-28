@@ -5,7 +5,6 @@ require('dotenv').config();
 // Require keystone
 var keystone = require('keystone');
 var cons = require('consolidate');
-var nunjucks = require('nunjucks');
 
 keystone.init({
 	'name': 'KeyStone Example',
@@ -37,7 +36,5 @@ keystone.set('nav', {
 	enquiries: 'enquiries',
 	ys: 'ys',
 });
-
-
 
 keystone.start();
