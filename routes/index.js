@@ -1,19 +1,19 @@
-var keystone = require('keystone');
-var middleware = require('./middleware');
-var importRoutes = keystone.importer(__dirname);
+const keystone = require('keystone');
+const middleware = require('./middleware');
+const importRoutes = keystone.importer(__dirname);
 
-var LocalStrategy = require("passport-local").Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 
-var FacebookStrategy = require('passport-facebook').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 
-var FaceBookSetting = {
+const FaceBookSetting = {
 	clientID: 180697565778269,
 	clientSecret: '498f3e57a48616fac08b22b9c6417ab7'
 };
 
-var passport = require('passport');
+const passport = require('passport');
 
-var userModel = keystone.list('Y').model;
+const userModel = keystone.list('Y').model;
 
 
 passport.serializeUser(function (user, done) {
@@ -25,9 +25,6 @@ passport.deserializeUser(function (user_data, done) {
 	console.log('des');
 	console.log(user_data);
 	done(null, user_data);
-	// userModel.findOne({email: user_data.email}, function (err, user) {
-	// 	done(err, user);
-	// });
 });
 
 
@@ -50,8 +47,7 @@ passport.use(new LocalStrategy(
 							req.user = user;
 							return done(null, user);
 
-						}
-						else {
+						} else {
 							return done(null, false);
 						}
 					});
@@ -69,18 +65,18 @@ passport.use(new FacebookStrategy({
 		clientID: FaceBookSetting.clientID,
 		clientSecret: FaceBookSetting.clientSecret,
 		callbackURL: "http://localhost:3000/auth/facebook/callback",
-		profileFields: ['id', 'displayName', 'link', 'email', 'first_name', 'last_name']
+		profileFields: ['id', 'displayName', 'link', 'email', 'first_name', 'last_name', 'location']
 	},
 	function (accessToken, refreshToken, profile, done) {
 		process.nextTick(function () {
 
 			console.log(profile);
-			var email = profile.emails[0].value;
+			let email = profile.emails[0].value;
 			userModel.findOne({email: email}).exec(function (err, oldUser) {
 				if (oldUser) {
 					done(null, oldUser);
 				} else {
-					var insertData = {
+					let insertData = {
 						name: {first: profile.name.familyName, last: profile.name.givenName},
 						password: profile.id + '',
 						email: email,
@@ -89,7 +85,7 @@ passport.use(new FacebookStrategy({
 
 					console.log(insertData);
 
-					var newUser = new userModel(insertData).save(function (err, newUser) {
+					let newUser = new userModel(insertData).save(function (err, newUser) {
 						if (err) throw err;
 						done(null, newUser);
 					});
@@ -116,7 +112,7 @@ keystone.pre("routes", function (req, res, next) {
 });
 
 // Import Route Controllers
-var routes = {
+const routes = {
 	views: importRoutes('./views')
 };
 
@@ -155,7 +151,9 @@ exports = module.exports = function (app) {
 		}));
 
 	// facebook auth
-	app.get("/auth/facebook", passport.authenticate('facebook', {scope: ['email']}));
+	app.get("/auth/facebook", passport.authenticate('facebook',
+		{scope: ['email', 'public_profile', 'user_location']}
+	));
 
 	app.get("/auth/facebook/callback",
 		passport.authenticate("facebook",
