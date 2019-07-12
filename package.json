@@ -5,17 +5,19 @@
   "dependencies": {
     "async": "2.1.4",
     "consolidate": "0.14.5",
+    "constantinople": "^3.1.1",
+    "cryptiles": "^4.1.2",
     "dotenv": "4.0.0",
     "keystone": "4.0.0-beta.5",
     "keystone-social-login": "github:johnnyestilles/keystone-social-login",
     "lodash": "^4.17",
+    "marked": "^0.3.18",
+    "method-override": "^2.3.10",
+    "morgan": "^1.9.1",
+    "mpath": "^0.5.1",
     "nunjucks": "3.0.0",
     "passport-local": "^1.0.0",
     "stylus": "0.54.5",
-    "constantinople": "^3.1.1",
-    "morgan": "^1.9.1",
-    "method-override": "^2.3.10",
-    "marked": "^0.3.18",
     "uglify-js": "^2.6.0"
   },
   "devDependencies": {
