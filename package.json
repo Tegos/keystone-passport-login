@@ -8,7 +8,7 @@
     "constantinople": "^3.1.1",
     "cryptiles": "^4.1.2",
     "dotenv": "4.0.0",
-    "keystone": "4.0.0-beta.5",
+    "keystone": "4.0.0",
     "keystone-social-login": "github:johnnyestilles/keystone-social-login",
     "lodash": "^4.17",
     "marked": "^0.3.18",
