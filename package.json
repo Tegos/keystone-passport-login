@@ -18,7 +18,7 @@
     "mpath": "^0.5.1",
     "nunjucks": "3.0.0",
     "passport-local": "^1.0.0",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "static-eval": "^2.0.0",
     "stylus": "0.54.5",
     "uglify-js": "^2.6.0"
