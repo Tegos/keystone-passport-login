@@ -13,7 +13,7 @@
     "lodash": "^4.17",
     "marked": "^0.3.18",
     "method-override": "^2.3.10",
-    "moment": "^2.19.4",
+    "moment": "^2.29.2",
     "morgan": "^1.9.1",
     "mpath": "^0.5.1",
     "nunjucks": "3.0.0",
